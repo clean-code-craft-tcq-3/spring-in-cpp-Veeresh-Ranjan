@@ -4,6 +4,53 @@
 
 using namespace std;
 
+class IAlerter
+{
+public:
+    IAlerter()
+    {
+
+    }
+
+};
+class EmailAlert:public IAlerter
+{
+    public:
+        bool emailSent;
+};
+class LEDAlert:public IAlerter
+{
+    public:
+        bool ledGlows;
+};
+class StatsAlerter:public IAlerter
+{
+    float maxThreshold;
+    std::vector<IAlerter*> alerters;
+public:
+    StatsAlerter(float maxThreshold1,std::vector<IAlerter*> alerters)
+    {
+        this->maxThreshold = maxThreshold1;
+        this->alerters = alerters;
+
+    }
+    void checkAndAlert(const std::vector<double>& a)
+    {
+        for (std::size_t i = 0; i < a.size(); i++)
+        {
+            if(a.at(i)>maxThreshold)
+            {
+                static_cast<EmailAlert*>(alerters.at(0))->emailSent = 1;
+                static_cast<LEDAlert*>(alerters.at(1))->ledGlows = 1;
+            }
+
+        }
+
+    }
+};
+
+
+
 class Stats
 {
     public:
@@ -29,4 +76,5 @@ class Stats
 namespace Statistics {
     Stats ComputeStatistics(const std::vector<double>& a);
 }
+
 
