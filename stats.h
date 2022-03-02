@@ -42,6 +42,7 @@ public:
             {
                 static_cast<EmailAlert*>(alerters.at(0))->emailSent = 1;
                 static_cast<LEDAlert*>(alerters.at(1))->ledGlows = 1;
+                break;
             }
 
         }
