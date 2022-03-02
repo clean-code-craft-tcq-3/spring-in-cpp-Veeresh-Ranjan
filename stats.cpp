@@ -17,3 +17,4 @@ Stats Statistics::ComputeStatistics(const std::vector<double>& a) {
     return stats_obj;
 }
 
+
